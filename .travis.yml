@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - 5.4
+
+before_script:
+  - composer self-update && composer --version
+  - composer require --prefer-source satooshi/php-coveralls 0.6.*
+
+script:
+  - ./vendor/bin/phpunit --coverage-clover clover.xml
+
+after_script:
+  - php vendor/bin/coveralls
+
