@@ -106,7 +106,7 @@ class BeansConfiguration implements BeanFactory
 class BeanBuilder
 {
     public $constructorArgs = array();
-    public $properties = array();
+    public $valProperties = array();
     public $refProperties = array();
     public $className = "";
 
@@ -127,8 +127,8 @@ class BeanBuilder
             $beanBuilder->constructorArgs = $config['constructorArgs'];
         }
         
-        if (isset($config['properties'])) {
-            $beanBuilder->properties = $config['properties'];
+        if (isset($config['valProperties'])) {
+            $beanBuilder->valProperties = $config['valProperties'];
         }
         
         if (isset($config['refProperties'])) {
@@ -143,7 +143,7 @@ class BeanBuilder
         
         $reflection = new \ReflectionClass($this->className);
         $bean = $reflection->newInstanceArgs($this->constructorArgs);
-        foreach ($this->properties as $key => $value) {
+        foreach ($this->valProperties as $key => $value) {
             $bean->{$key} = $value;
         }
 

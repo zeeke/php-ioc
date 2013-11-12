@@ -14,16 +14,15 @@ class AppContextTest extends \PHPUnit_Framework_TestCase
             'refProperties' => [
                 'beanTwoRef' => 'beanTwo',
             ],
-            'properties' => [
+            'valProperties' => [
                 'prop1' => 20,
                 'prop2' => 'example string',
-                'beanTwoRef' => []
             ],
         ],
 
         'beanTwo' => [
             'class' => '\laborra\spring\ClassTwo',
-            'properties' => [
+            'valProperties' => [
                 'prop1' => 42,
             ],
         ],
