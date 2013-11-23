@@ -183,7 +183,7 @@ class BeanProxy
     public function __call ($name, $args)
     {
         $this->load();
-        return call_user_func($this->target, $args);
+        return call_user_func_array([$this->target, $name], $args);
     }
 
     public function __get ($name)
