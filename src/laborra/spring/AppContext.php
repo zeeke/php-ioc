@@ -42,6 +42,11 @@ class AppContext implements BeanFactory
         return self::$instance;
     }
 
+    public static function bean ($beanId)
+    {
+        return self::get()->getBean($beanId);
+    }
+
     public function getBean ($beanId)
     {
         return $this->beanFactory->getBean($beanId);
