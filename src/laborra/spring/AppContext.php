@@ -147,7 +147,8 @@ class BeanBuilder
         }
 
         foreach ($this->refProperties as $key => $value) {
-            $bean->{$key} = new BeanProxy($value, AppContext::get());
+            //$bean->{$key} = new BeanProxy($value, AppContext::get());
+            $bean->{$key} = AppContext::bean($value);
         }
 
         return $bean;
