@@ -42,6 +42,11 @@ class AppContext implements IBeanFactory
         return self::$instance;
     }
 
+    public static function bean ($beanId)
+    {
+        return self::get()->getBean($beanId);
+    }
+
     public function getBean ($beanId)
     {
         return $this->beanFactory->getBean($beanId);
@@ -142,7 +147,8 @@ class BeanBuilder
         }
 
         foreach ($this->refProperties as $key => $value) {
-            $bean->{$key} = new BeanProxy($value, AppContext::get());
+            //$bean->{$key} = new BeanProxy($value, AppContext::get());
+            $bean->{$key} = AppContext::bean($value);
         }
 
         return $bean;
@@ -178,7 +184,7 @@ class BeanProxy
     public function __call ($name, $args)
     {
         $this->lazyLoad();
-        return call_user_func($this->target, $args);
+        return call_user_func_array([$this->target, $name], $args);
     }
 
     public function __get ($name)
