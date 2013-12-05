@@ -168,7 +168,7 @@ class BeanProxy
         $this->beanFactory = $beanFactory;
     }
 
-    private function load ()
+    private function lazyLoad ()
     {
         if ($this->target === null) {
             $this->target = $this->beanFactory->getBean($this->targetId);
@@ -177,19 +177,19 @@ class BeanProxy
 
     public function __call ($name, $args)
     {
-        $this->load();
+        $this->lazyLoad();
         return call_user_func($this->target, $args);
     }
 
     public function __get ($name)
     {
-        $this->load();
+        $this->lazyLoad();
         return $this->target->{$name};
     }
 
     public function __set ($name, $value)
     {
-        $this->load();
+        $this->lazyLoad();
         $this->target->{$name} = $value;
     }
 }
