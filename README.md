@@ -13,11 +13,11 @@ logic of an application without depending on the specific framework. All
 the core logic can be placed in simple PHP classes, where dependency are
 injected by the container.
 
-# Configuration
+## Configuration
 
 TBD
 
-# Basic Usage
+## Basic Usage
 
 The main library class is AppContext, which offers methods to
 initialize and use the IoC context. Using the AppContext::init(...)
@@ -109,7 +109,7 @@ echo $beanObj->gett(); // String value : 67
 ```
 
 
-# Defining Application Modules
+## Defining Application Modules
 
 Using an IoC container it is possible to build modularized applications.
 Each module consists of a set of library classes, a set of dependency
@@ -201,7 +201,7 @@ beans:
         class:  SpecificUserDAO
 
 
-# ConfigurationBuilder utility
+## ConfigurationBuilder utility
 
 In order to produce readable and maintenable configuration files, you
 can use the ConfigurationBuilder class.
