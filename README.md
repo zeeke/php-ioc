@@ -3,10 +3,9 @@ PHP Inversion of Control
 
 IoC framework for PHP
 
-[![Coverage Status](https://coveralls.io/repos/zeeke/php-spring/badge.png)](https://coveralls.io/r/zeeke/php-spring)
-[![Build Status](https://travis-ci.org/zeeke/php-spring.png?branch=master)](https://travis-ci.org/zeeke/php-spring)
+[![Coverage Status](https://coveralls.io/repos/zeeke/php-ioc/badge.png)](https://coveralls.io/r/zeeke/php-ioc)
+[![Build Status](https://travis-ci.org/zeeke/php-ioc.png?branch=master)](https://travis-ci.org/zeeke/php-ioc)
 
-# PHP IoC
 
 Using an Inversion Of Control container you can define the business
 logic of an application without depending on the specific framework. All
