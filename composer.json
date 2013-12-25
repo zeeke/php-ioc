@@ -5,7 +5,7 @@
     "type": "library",
     "license": "BSD-3-Clause",
     "support": {
-        "source": "https://github.com/zeeke/php-spring"
+        "source": "https://github.com/zeeke/php-ioc"
     },
     "minimum-stability": "dev",
     "require-dev": {
