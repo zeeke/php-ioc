@@ -23,6 +23,8 @@ class ContextFactory
         if ($extension == 'yml') {
             return self::buildFromYamlFile($fileName);
         }
+
+        throw new BadConfigurationException("File $fileName not supported.");
     }
 
     public static function buildFromPHPArray ($config)
@@ -81,5 +83,6 @@ class ContextFactory
     public static function buildFromYamlFile ($fileName)
     {
         // TODO
+        throw new \Exception("Not supported yet");
     }
 }

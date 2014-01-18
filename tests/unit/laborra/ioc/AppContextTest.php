@@ -1,49 +1,51 @@
 <?php
 
-namespace laborra\spring;
+namespace laborra\ioc;
 
-/**
- * @runTestsInSeparateProcesses
- */
 class AppContextTest extends \PHPUnit_Framework_TestCase
 {
     private static $CONF = [
         'beanOne' => [
-            'class' => '\laborra\spring\ClassOne',
+            'class' => '\laborra\ioc\ClassOne',
             'constructorArgs' => ['1', 10],
-            'refProperties' => [
-                'beanTwoRef' => 'beanTwo',
-            ],
-            'valProperties' => [
+            'properties' => [
+                'beanTwoRef' => '@beanTwo',
                 'prop1' => 20,
                 'prop2' => 'example string',
             ],
         ],
 
         'beanTwo' => [
-            'class' => '\laborra\spring\ClassTwo',
-            'valProperties' => [
+            'class' => '\laborra\ioc\ClassTwo',
+            'properties' => [
                 'prop1' => 42,
             ],
         ],
 
         'dontRef' => [
-            'class' => '\laborra\spring\DontRef',
-            'refProperties' => [
-                'dontLoad' => 'dontLoad',
+            'class' => '\laborra\ioc\DontRef',
+            'properties' => [
+                'dontLoad' => '@dontLoad',
             ],
         ],
 
         'dontLoad' => [
-            'class' => '\laborra\spring\DontLoadClass',
+            'class' => '\laborra\ioc\DontLoadClass',
         ]
     ];
 
+    /** @var  AppContext $context */
+    private $context;
+
+    protected function setUp ()
+    {
+        $this->context = ContextFactory::buildFromPHPArray(
+            ['beans' => self::$CONF]);
+    }
+
     public function testBasic ()
     {
-        AppContext::init(self::$CONF);
-
-        $bean1 = AppContext::get()->getBean('beanOne');
+        $bean1 = $this->context->getBean('beanOne');
 
         $this->assertEquals($bean1->prop1, 20);
         $this->assertEquals($bean1->prop2, 'example string');
@@ -54,17 +56,16 @@ class AppContextTest extends \PHPUnit_Framework_TestCase
 
     public function testSingleton ()
     {
-        AppContext::init(self::$CONF);
-        $bean1 = AppContext::get()->getBean('beanOne');
-        $bean2 = AppContext::get()->getBean('beanOne');
+        $bean1 = $this->context->getBean('beanOne');
+        $bean2 = $this->context->getBean('beanOne');
 
         $this->assertEquals($bean2, $bean1);
     }
 
     public function testLazyLoading ()
     {
-        AppContext::init(self::$CONF);
-        $dontRefBean = AppContext::get()->getBean('dontRef');
+        $this->markTestSkipped("Lazy loading is not yet implemented");
+        $dontRefBean = $this->context->getBean('dontRef');
         $bean2 = $dontRefBean->dontLoad;
 
         try {

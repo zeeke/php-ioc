@@ -19,6 +19,8 @@ class ContextOptionsHolder
 
     public function getBaseNameSpace ()
     {
-        return $this->config['baseNamespace'] ? : null;
+        return isset($this->config['baseNamespace'])
+            ? $this->config['baseNamespace']
+            : null;
     }
 }
