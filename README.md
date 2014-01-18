@@ -3,21 +3,20 @@ PHP Inversion of Control
 
 IoC framework for PHP
 
-[![Coverage Status](https://coveralls.io/repos/zeeke/php-spring/badge.png)](https://coveralls.io/r/zeeke/php-spring)
-[![Build Status](https://travis-ci.org/zeeke/php-spring.png?branch=master)](https://travis-ci.org/zeeke/php-spring)
+[![Coverage Status](https://coveralls.io/repos/zeeke/php-ioc/badge.png)](https://coveralls.io/r/zeeke/php-ioc)
+[![Build Status](https://travis-ci.org/zeeke/php-ioc.png?branch=master)](https://travis-ci.org/zeeke/php-ioc)
 
-# PHP IoC
 
 Using an Inversion Of Control container you can define the business
 logic of an application without depending on the specific framework. All
 the core logic can be placed in simple PHP classes, where dependency are
 injected by the container.
 
-# Configuration
+## Configuration
 
 TBD
 
-# Basic Usage
+## Basic Usage
 
 The main library class is AppContext, which offers methods to
 initialize and use the IoC context. Using the AppContext::init(...)
@@ -110,7 +109,7 @@ echo $beanObj->gett(); // String value : 67
 ```
 
 
-# Defining Application Modules
+## Defining Application Modules
 
 Using an IoC container it is possible to build modularized applications.
 Each module consists of a set of library classes, a set of dependency
@@ -203,7 +202,7 @@ beans:
         class:  SpecificUserDAO
 
 
-# ConfigurationBuilder utility
+## ConfigurationBuilder utility
 
 In order to produce readable and maintenable configuration files, you
 can use the ConfigurationBuilder class.

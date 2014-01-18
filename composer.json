@@ -1,7 +1,7 @@
 {
     "name": "laborra/php-ioc",
     "description": "PHP framework for managing dependency injection",
-    "keywords": ["PHP", "framework"],
+    "keywords": ["PHP", "framework", "dependency injection"],
     "type": "library",
     "license": "BSD-3-Clause",
     "support": {
