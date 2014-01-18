@@ -2,6 +2,7 @@
 
 namespace laborra\ioc\full;
 
+use laborra\ioc\AppContext;
 use laborra\ioc\ContextFactory;
 
 class FullTest extends \PHPUnit_Framework_TestCase
@@ -12,7 +13,7 @@ class FullTest extends \PHPUnit_Framework_TestCase
         $baseConfDir = __DIR__.'/../../../../conf/full/';
         $contexts = [
             ContextFactory::buildFromFile("$baseConfDir/config.php"),
-//            ContextFactory::buildFromFile(__DIR__.'/../../../conf/full/builder.php'),
+            ContextFactory::buildFromFile("$baseConfDir/builder.php"),
 //            ContextFactory::buildFromFile(__DIR__.'/../../../conf/full/config.yaml'),
         ];
 
@@ -24,12 +25,20 @@ class FullTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function basicCheck ($context) {
-        $bean = $context->getBean('basicBean');
-        $this->assertInstanceOf('laborra\ioc\full\BasicClass', $bean);
+    public function basicCheck (AppContext $context) {
+
+        $this->assertInstanceOf(
+            'laborra\ioc\full\BasicClass',
+            $bean = $context->getBean('basicBean')
+        );
+
+        $this->assertInstanceOf(
+            'laborra\ioc\full\BasicClass',
+            $context->getBean('shortcutBean')
+        );
     }
 
-    public function constructorArgCheck ($context)
+    public function constructorArgCheck (AppContext $context)
     {
         $bean = $context->getBean('constructorArgBean');
         $this->assertEquals('simple value', $bean->value);
@@ -40,7 +49,7 @@ class FullTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function setterClassCheck ($context)
+    public function setterClassCheck (AppContext $context)
     {
         $bean = $context->getBean('setterBean');
         $this->assertEquals('simpleValue', $bean->getValue());
@@ -51,7 +60,7 @@ class FullTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function callsCheck ($context)
+    public function callsCheck (AppContext $context)
     {
         $bean = $context->getBean('callsBean');
         $this->assertEquals(42, $bean->propertyOne);

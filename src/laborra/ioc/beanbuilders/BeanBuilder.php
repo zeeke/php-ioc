@@ -7,7 +7,6 @@
 namespace laborra\ioc\beanbuilders;
 
 use laborra\ioc\BadConfigurationException;
-use laborra\ioc\beanbuilders\IBeanBuilder;
 
 class BeanBuilder implements IBeanBuilder
 {
@@ -20,7 +19,6 @@ class BeanBuilder implements IBeanBuilder
     {
         $reflection = new \ReflectionClass($config['class']);
         $bean = $reflection->newInstanceArgs($config['constructorArgs']);
-
 
         foreach ($config['properties'] as $key => $value) {
             // TODO - use setter or public attribute access

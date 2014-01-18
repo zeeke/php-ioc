@@ -16,7 +16,7 @@ return [
             'class' => '\laborra\ioc\full\BasicClass',
         ],
 
-        'shortcutClass' => [
+        'shortcutBean' => [
             '\laborra\ioc\full\BasicClass', // If the first element has a numeric key, then it is the class name
         ],
 
@@ -48,6 +48,7 @@ return [
     ],
 
     'aspects' => [
+        // Not yet implemented
     ],
 ];
 

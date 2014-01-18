@@ -33,6 +33,21 @@ class ConfigurationBuilder
     {
         return $this->config;
     }
+
+    public function lazyLoading ($value)
+    {
+        $this->config['context']['lazyLoadging'] = $value;
+    }
+
+    public function baseNamespace ($baseNamespace)
+    {
+        $this->config['context']['baseNamespace'] = $baseNamespace;
+    }
+
+    public function param ($paramName, $paramValue)
+    {
+        $this->config['parameters'][$paramName] = "$paramValue";
+    }
 }
 
 class BeanDefinitionBuilder
@@ -46,7 +61,7 @@ class BeanDefinitionBuilder
     public function __construct (ConfigurationBuilder $confBuilder, array &$config)
     {
         $this->confBuilder = $confBuilder;
-        $this->config = $config;
+        $this->config = &$config;
     }
 
     public function property ($propName, $value)
@@ -67,12 +82,23 @@ class BeanDefinitionBuilder
 
     public function constructorArg ($argValue)
     {
-        // TODO
+        $this->initSection('constructorArgs');
+        $this->config['constructorArgs'][] = $argValue;
+        return $this;
     }
 
-    public function call ($methodName, $args = [])
+    public function constructorArgs (array $args)
     {
-        // TODO
+        $this->initSection('constructorArgs');
+        $this->config['constructorArgs'] = $args;
+        return $this;
+    }
+
+    public function call ($methodName, array $args = [])
+    {
+        $this->initSection('calls');
+        $this->config['calls'][$methodName] = $args;
+        return $this;
     }
 }
 
