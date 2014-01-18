@@ -12,16 +12,9 @@ logic of an application without depending on the specific framework. All
 the core logic can be placed in simple PHP classes, where dependency are
 injected by the container.
 
-## Configuration
-
-TBD
-
 ## Basic Usage
 
-The main library class is AppContext, which offers methods to
-initialize and use the IoC context. Using the AppContext::init(...)
-function it is possible to specify a configuration for the IoC
-container.
+The main library class is AppContext, that can be built using the ContextFactory helper,
 
 ```PHP
 
@@ -30,39 +23,44 @@ $config = [
     //... 
 ];
 
-$config = 'path/to/configurationfile.[php|yaml]
+$context = ContextFactory::buildFromPHPArray($config);
 
-AppContext::init($config);
+// Or
+
+$context = ContextFactory::buildFromFile('path/to/configurationfile.php');
 
 ```
 
-# Example
-
-beans:
-    beanOne:
-        class:  ClassOne
-        properties:
-            valueProp: 42
-    
-    beanTwo:
-        class:  ClassTwo
-        properties:
-            refOne: @beanOne
-    
-    beanThree:
-        class:  ClassThree
-        properties:
-            refOne: @beanOne
-            valueProp:  15
-    
-    beanFour:
-        class: ClassFour
-        constructor-args:
-            - @beanTwo
-            - 25
-            - "String value"
+Below is an example of context configuration with a bas
 
 ```PHP
+
+// config.php
+return [
+    'beans' => [
+        'beanOne' => [
+            'ClassOne',
+            'properties' => [
+                'valueProp' => 42,
+            ],
+        ],
+        'beanTwo' => [
+            'ClassTwo',
+            'properties' => [
+                'refOne' => '@beanOne',
+            ],
+        ],
+
+        'beanThree' => [
+            'ClassThree',
+            'constructorArgs' => [
+                @beanTwo,
+                'Answer to life the universe and everything'
+            ],
+        ],
+    ],
+
+]
 
 class ClassOne
 {
@@ -77,44 +75,36 @@ class ClassTwo
 
 class ClassThree
 {
-    /** @var ClassOne */
-    public $refOne;
-    
-    public $valueProp;
-}
+    /** @var ClassTwo */
+    private $refTwo;
 
+    /** @var string */
+    private $strProp
 
-class ClassFour
-{
-    private $calulatedValue;
-    private $strProp;
-    
-    public function __constructor (ClassOne $refOne, $intValue, $strValue)
+    public function __constructor (ClassTwo $refTwo, $strAtg)
     {
-        $this->calculatedValue = $refOne->valueProp + $intValue;
-        $this->strProp = $strValue;
+        $this->strProp = $strArg;
     }
-    
+
     public function getIt ()
     {
-        return "$this->strProp : $this->calculatedValue";
+        return $this->strProp.' = '.$this->refTwo->refOne->valueProp;
     }
 }
 
 // In application logic
 
-$beanObj = AppContext::getBean('beanFour);
-echo $beanObj->gett(); // String value : 67
+$beanObj = $context->getBean('beanThree');
+echo $beanObj->getIt(); // Answer to life the universe and everything = 42
 
 ```
-
 
 ## Defining Application Modules
 
 Using an IoC container it is possible to build modularized applications.
 Each module consists of a set of library classes, a set of dependency
-and list of bean that must be implemented by the module users.
-In this way, we can define an entire unit of business logic without
+and list of bean that must be implemented by the module client.
+In this way, you can define an entire unit of business logic without
 referencing any framework or specific environment.
 
 ### Example of user management module
@@ -211,13 +201,13 @@ Below there is an example of a configuration built using this class.
 ```PHP
 $c = new ConfigurationBuilder();
 
-$c->bean('beanOneId', '\vendorName\library\BeanOneClass')
-    ->prop('valueProp', 12)
-    ->prop('refProp', '@beanTwoId')
+$c->bean('beanOne', '\vendorName\library\ClassName')
+    ->property('valueProp', 12)
+    ->property('refProp', '@beanTwo')
     ->constructorArg('String value')
-    ->constructorArg(42)
-    ->build();
+    ->constructorArg(42);
 
+return $c->build();
 
 ```
 
