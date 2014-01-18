@@ -64,6 +64,7 @@ beans:
             - "String value"
 
 ```PHP
+
 class ClassOne
 {
     public $valueProp;
@@ -91,7 +92,7 @@ class ClassFour
     
     public function __constructor (ClassOne $refOne, $intValue, $strValue)
     {
-        $this->calculatedValue = $refOne + $intValue;
+        $this->calculatedValue = $refOne->valueProp + $intValue;
         $this->strProp = $strValue;
     }
     
@@ -120,6 +121,7 @@ referencing any framework or specific environment.
 ### Example of user management module
 
 ```PHP
+
 class UserService
 {
     /** @var IUserDAO

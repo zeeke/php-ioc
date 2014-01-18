@@ -1,17 +1,17 @@
 {
-    "name": "laborra/php-spring",
+    "name": "laborra/php-ioc",
     "description": "PHP framework for managing dependency injection",
     "keywords": ["PHP", "framework"],
     "type": "library",
     "license": "BSD-3-Clause",
     "support": {
-        "source": "https://github.com/zeeke/php-spring"
+        "source": "https://github.com/zeeke/php-ioc"
     },
     "minimum-stability": "dev",
     "require-dev": {
         "phpunit/phpunit": "3.7.28"
     },
     "autoload": {
-        "psr-0": {"laborra\\spring": "src/"}
+        "psr-0": {"laborra\\ioc": "src/"}
     }
 }
