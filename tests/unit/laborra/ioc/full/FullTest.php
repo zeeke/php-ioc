@@ -10,7 +10,7 @@ class FullTest extends \PHPUnit_Framework_TestCase
 
     public function testFull ()
     {
-        $baseConfDir = __DIR__.'/../../../../conf/full/';
+        $baseConfDir = __DIR__.'/../../../../conf/full';
         $contexts = [
             ContextFactory::buildFromFile("$baseConfDir/config.php"),
             ContextFactory::buildFromFile("$baseConfDir/builder.php"),
