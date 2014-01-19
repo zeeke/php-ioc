@@ -12,6 +12,19 @@ logic of an application without depending on the specific framework. All
 the core logic can be placed in simple PHP classes, where dependency are
 injected by the container.
 
+## Installation
+
+The library can be installed using Composer:
+
+```
+
+# Install Composer
+curl -sS https://getcomposer.org/installer | php
+
+# Add php-ioc as a dependency (use dev-master until a stable release is out)
+php composer.phar require laborra/php-ioc:dev-master
+```
+
 ## Basic Usage
 
 The main library class is AppContext, that can be built using the ContextFactory helper,
@@ -98,6 +111,23 @@ $beanObj = $context->getBean('beanThree');
 echo $beanObj->getIt(); // Answer to life the universe and everything = 42
 
 ```
+
+## Features
+
+The current supported features are:
+- Bean definition as request singleton scope
+- Definition of relationships between beans
+- Constructor arguments
+- Class calls after bean creation
+- Definition of context parameters
+- Configuration based on PHP array and ConfigurationBuilder helper
+
+Features available in future releases:
+- Prototype scope for beans
+- Support for Aspect Oriented Programming
+- Cache for configuration and application context
+- Configuration in yaml files
+- Support for multiple configuration files
 
 ## Defining Application Modules
 
