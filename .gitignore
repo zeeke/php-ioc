@@ -3,5 +3,7 @@
 /nbproject
 /build
 /vendor
+/.idea
+/composer.phar
 clover.xml
 
