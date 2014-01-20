@@ -65,6 +65,7 @@ class AppContextTest extends \PHPUnit_Framework_TestCase
     public function testLazyLoading ()
     {
         $this->markTestSkipped("Lazy loading is not yet implemented");
+
         $dontRefBean = $this->context->getBean('dontRef');
         $bean2 = $dontRefBean->dontLoad;
 

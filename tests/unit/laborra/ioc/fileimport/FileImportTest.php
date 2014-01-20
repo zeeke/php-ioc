@@ -14,6 +14,13 @@ class FileImportTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testYAML ()
+    {
+        $this->checkBeanImport(
+            ContextFactory::buildFromFile(__DIR__.'/conf/config.yml')
+        );
+    }
+
     public function checkBeanImport (AppContext $context)
     {
         $bean = $context->getBean('importedBean');
@@ -32,8 +39,6 @@ class FileImportTest extends \PHPUnit_Framework_TestCase
             $context->getBean('basicBeanRef')->refBean->value,
             $context->getBean('importedBean')
         );
-
-
     }
 }
 

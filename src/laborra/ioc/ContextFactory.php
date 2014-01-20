@@ -28,7 +28,16 @@ class ContextFactory
 
     private static function importYAMLFile ($fileName)
     {
-        return Yaml::parse($fileName);
+        $config = Yaml::parse($fileName);
+
+        if (isset($config['imports'])) {
+            foreach ($config['imports'] as $index => $import) {
+                if (substr($import, 0, 2) == './') {
+                    $config['imports'][$index] = dirname($fileName).DIRECTORY_SEPARATOR.$import;
+                }
+            }
+        }
+        return $config;
     }
 
     public static function buildFromPHPArray ($config)
@@ -95,9 +104,7 @@ class ContextFactory
 
     public static function buildFromYamlFile ($fileName)
     {
-        return self::buildFromPHPArray(
-            self::importYAMLFile($fileName)
-        );
+        return self::buildFromPHPArray(self::importYAMLFile($fileName));
     }
 
     /**
