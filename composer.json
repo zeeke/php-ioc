@@ -13,5 +13,8 @@
     },
     "autoload": {
         "psr-0": {"laborra\\ioc": "src/"}
+    },
+    "require": {
+        "symfony/yaml": "2.4.x-dev"
     }
 }

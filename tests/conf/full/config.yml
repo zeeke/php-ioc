@@ -1,0 +1,38 @@
+context:
+    lazyLoading: true
+    baseNamespace: laborra\ioc\full
+
+parameters:
+    parameterName1: parameterValue1
+
+beans:
+    basicBean:
+        class:  \laborra\ioc\full\BasicClass
+
+    shortcutBean:
+        class:  \laborra\ioc\full\BasicClass  # Shortcut not supported in YAML file
+
+    constructorArgBean:
+        class:  \\ConstructorArgClass
+        constructorArgs:
+            - "simple value"
+            - "%parameterName1%"
+            - @basicBean
+
+    setterBean:
+        class:  \\SetterClass
+        properties:
+            value:  "simpleValue"
+            param:  "%parameterName1%"
+            reference:  @basicBean
+
+    callsBean:
+        class:  \\CallClass
+        calls:
+            noArgsCall: []
+            argsCall:
+                - foo
+                - @setterBean
+
+
+

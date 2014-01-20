@@ -10,6 +10,7 @@ use laborra\ioc\beanbuilders\ParamResolver;
 use laborra\ioc\beanbuilders\ReferenceReplacer;
 use laborra\ioc\beanbuilders\SyntaxChecker;
 use laborra\ioc\holders\ParametersHolder;
+use Symfony\Component\Yaml\Yaml;
 
 class ContextFactory
 {
@@ -83,6 +84,7 @@ class ContextFactory
     public static function buildFromYamlFile ($fileName)
     {
         // TODO
-        throw new \Exception("Not supported yet");
+        return self::buildFromPHPArray(
+            Yaml::parse($fileName));
     }
 }

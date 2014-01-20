@@ -14,7 +14,7 @@ class FullTest extends \PHPUnit_Framework_TestCase
         $contexts = [
             ContextFactory::buildFromFile("$baseConfDir/config.php"),
             ContextFactory::buildFromFile("$baseConfDir/builder.php"),
-//            ContextFactory::buildFromFile(__DIR__.'/../../../conf/full/config.yaml'),
+            ContextFactory::buildFromFile("$baseConfDir/config.yml"),
         ];
 
         foreach ($contexts as $context) {

@@ -23,6 +23,10 @@ class BaseNameSpaceResolver extends BeanBuilderProxy
             $config['class'] = $this->namespace . '\\' . ltrim($config['class'], '#\\');
         }
 
+        if (substr($config['class'], 0, 2) == '\\\\') {
+            $config['class'] = $this->namespace . '\\' . ltrim($config['class'], '\\\\');
+        }
+
         return $this->delegate->build($beanId, $config);
     }
 }
