@@ -16,16 +16,19 @@ class ContextFactory
 {
     public static function buildFromFile ($fileName)
     {
-        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
-        if ($extension == 'php') {
-            return self::buildFromPHPArray(include($fileName));
-        }
+        return self::buildFromPHPArray(
+            self::importFile($fileName)
+        );
+    }
 
-        if ($extension == 'yml') {
-            return self::buildFromYamlFile($fileName);
-        }
+    private static function importPHPFile ($fileName)
+    {
+        return include($fileName);
+    }
 
-        throw new BadConfigurationException("File $fileName not supported.");
+    private static function importYAMLFile ($fileName)
+    {
+        return Yaml::parse($fileName);
     }
 
     public static function buildFromPHPArray ($config)
@@ -40,6 +43,15 @@ class ContextFactory
 
         if (!isset($config['context'])) {
             $config['context'] = [];
+        }
+
+        if (isset($config['imports'])) {
+            foreach ($config['imports'] as $import) {
+                $config = array_merge_recursive(
+                    $config,
+                    self::importFile($import)
+                );
+            }
         }
 
         $paramsHolder = new ParametersHolder($config['parameters']);
@@ -83,8 +95,30 @@ class ContextFactory
 
     public static function buildFromYamlFile ($fileName)
     {
-        // TODO
         return self::buildFromPHPArray(
-            Yaml::parse($fileName));
+            self::importYAMLFile($fileName)
+        );
+    }
+
+    /**
+     * @param $fileName
+     * @throws BadConfigurationException
+     * @return array
+     */
+    public static function importFile ($fileName)
+    {
+        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+        switch ($extension) {
+            case 'php':
+                return self::importPHPFile($fileName);
+                break;
+
+            case 'yml':
+                return self::importYAMLFile($fileName);
+                break;
+
+            default:
+                throw new BadConfigurationException("File $fileName not supported.");
+        }
     }
 }
