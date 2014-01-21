@@ -3,9 +3,9 @@ PHP Inversion of Control
 
 IoC framework for PHP
 
-[![Coverage Status](https://coveralls.io/repos/zeeke/php-ioc/badge.png)](https://coveralls.io/r/zeeke/php-ioc)
 [![Build Status](https://travis-ci.org/zeeke/php-ioc.png?branch=master)](https://travis-ci.org/zeeke/php-ioc)
-
+[![Coverage Status](https://coveralls.io/repos/zeeke/php-ioc/badge.png)](https://coveralls.io/r/zeeke/php-ioc)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/zeeke/php-ioc/badges/quality-score.png?s=10e27b48ab4f440f45aaab7a337fbdb67070f5f1)](https://scrutinizer-ci.com/g/zeeke/php-ioc/)
 
 Using an Inversion Of Control container you can define the business
 logic of an application without depending on the specific framework. All
@@ -17,7 +17,6 @@ injected by the container.
 The library can be installed using Composer:
 
 ```
-
 # Install Composer
 curl -sS https://getcomposer.org/installer | php
 
@@ -120,13 +119,12 @@ The current supported features are:
 - Constructor arguments
 - Class calls after bean creation
 - Definition of context parameters
-- Configuration based on PHP array and ConfigurationBuilder helper
+- Configuration based on PHP array, ConfigurationBuilder helper and YAML files
 
 Features available in future releases:
 - Prototype scope for beans
 - Support for Aspect Oriented Programming
 - Cache for configuration and application context
-- Configuration in yaml files
 - Support for multiple configuration files
 
 ## Defining Application Modules
@@ -177,7 +175,7 @@ class UserService
     }
 }
 
-intreface IUserDAO
+interface IUserDAO
 {
     function getByUsername ($username);
 

@@ -1,0 +1,13 @@
+imports:
+  - ./config-import.php
+
+beans:
+  basicBean:
+    class:  \laborra\ioc\fileimport\BasicClass
+    properties:
+      value:  42
+
+  beanWithImportedRef:
+    class:  \laborra\ioc\fileimport\RefClass
+    properties:
+      refBean:  @importedBean
