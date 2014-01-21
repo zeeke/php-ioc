@@ -71,6 +71,9 @@ class BeanDefinitionBuilder
         return $this;
     }
 
+    /**
+     * @param string $sectionName
+     */
     private function initSection ($sectionName)
     {
         if (isset($this->config[$sectionName])) {

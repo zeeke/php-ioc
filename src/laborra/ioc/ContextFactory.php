@@ -3,9 +3,7 @@
 namespace laborra\ioc;
 
 use laborra\ioc\beanbuilders\BeanBuilder;
-use laborra\ioc\beanbuilders\BeanBuilderProxy;
 use laborra\ioc\beanbuilders\DefaultReplacer;
-use laborra\ioc\beanbuilders\IBeanBuilder;
 use laborra\ioc\beanbuilders\ParamResolver;
 use laborra\ioc\beanbuilders\ReferenceReplacer;
 use laborra\ioc\beanbuilders\SyntaxChecker;
