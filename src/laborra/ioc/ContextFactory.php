@@ -3,9 +3,7 @@
 namespace laborra\ioc;
 
 use laborra\ioc\beanbuilders\BeanBuilder;
-use laborra\ioc\beanbuilders\BeanBuilderProxy;
 use laborra\ioc\beanbuilders\DefaultReplacer;
-use laborra\ioc\beanbuilders\IBeanBuilder;
 use laborra\ioc\beanbuilders\ParamResolver;
 use laborra\ioc\beanbuilders\ReferenceReplacer;
 use laborra\ioc\beanbuilders\SyntaxChecker;
@@ -118,11 +116,9 @@ class ContextFactory
         switch ($extension) {
             case 'php':
                 return self::importPHPFile($fileName);
-                break;
 
             case 'yml':
                 return self::importYAMLFile($fileName);
-                break;
 
             default:
                 throw new BadConfigurationException("File $fileName not supported.");
