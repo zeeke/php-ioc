@@ -120,13 +120,12 @@ The current supported features are:
 - Constructor arguments
 - Class calls after bean creation
 - Definition of context parameters
-- Configuration based on PHP array and ConfigurationBuilder helper
+- Configuration based on PHP array, ConfigurationBuilder helper and YAML files
 
 Features available in future releases:
 - Prototype scope for beans
 - Support for Aspect Oriented Programming
 - Cache for configuration and application context
-- Configuration in yaml files
 - Support for multiple configuration files
 
 ## Defining Application Modules
@@ -177,7 +176,7 @@ class UserService
     }
 }
 
-intreface IUserDAO
+interface IUserDAO
 {
     function getByUsername ($username);
 
