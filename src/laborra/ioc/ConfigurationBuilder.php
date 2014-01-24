@@ -64,8 +64,15 @@ class BeanDefinitionBuilder
         $this->config = &$config;
     }
 
-    public function property ($propName, $value)
+    public function property ($propName, $value = null)
     {
+        if ($value == null) {
+            if (substr($propName, 0, 1) == '@') {
+                $propName = rtrim($propName, '@');
+                $value = $propName;
+            }
+        }
+
         $this->initSection('properties');
         $this->config['properties'][$propName] = $value;
         return $this;
