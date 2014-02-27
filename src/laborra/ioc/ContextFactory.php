@@ -54,10 +54,18 @@ class ContextFactory
 
         if (isset($config['imports'])) {
             foreach ($config['imports'] as $import) {
-                $config = array_merge_recursive(
-                    $config,
-                    self::importFile($import)
-                );
+
+                $importedConfig = self::importFile($import);
+                foreach (['imports', 'beans', 'parameters', 'context'] as $type) {
+                    if (!isset($importedConfig[$type])) {
+                        continue;
+                    }
+
+                    $config[$type] = array_merge(
+                        $config[$type],
+                        $importedConfig[$type]
+                    );
+                }
             }
         }
 

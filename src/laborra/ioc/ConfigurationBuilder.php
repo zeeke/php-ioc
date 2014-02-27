@@ -14,6 +14,7 @@ class ConfigurationBuilder
             'params' => [],
             'aspects' => [],
             'beans' => [],
+            'imports' => [],
         ];
     }
 
@@ -48,6 +49,11 @@ class ConfigurationBuilder
     {
         $this->config['parameters'][$paramName] = "$paramValue";
     }
+
+    public function import ($resource)
+    {
+        $this->config['imports'][] = $resource;
+    }
 }
 
 class BeanDefinitionBuilder
@@ -68,8 +74,8 @@ class BeanDefinitionBuilder
     {
         if ($value == null) {
             if (substr($propName, 0, 1) == '@') {
-                $propName = rtrim($propName, '@');
                 $value = $propName;
+                $propName = ltrim($propName, '@');
             }
         }
 
