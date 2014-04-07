@@ -37,7 +37,7 @@ class ConfigurationBuilder
 
     public function lazyLoading ($value)
     {
-        $this->config['context']['lazyLoadging'] = $value;
+        $this->config['context']['lazyLoading'] = $value;
     }
 
     public function baseNamespace ($baseNamespace)
